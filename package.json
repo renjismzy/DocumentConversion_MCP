@@ -1,0 +1,55 @@
+{
+  "name": "mcp-streamable-http",
+  "version": "1.0.0",
+  "description": "MCP (Model Context Protocol) servers with Streamable HTTP and Stdio transport support",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm run install:python && npm run install:typescript && npm run install:examples",
+    "install:python": "cd document-converter/server && pip install -e .",
+    "install:typescript": "cd document-converter/typescript-server && npm install",
+    "install:examples": "cd python-example/client && pip install -e . && cd ../../typescript-example/client && npm install && cd ../server && npm install",
+    "build:all": "npm run build:typescript && npm run build:examples",
+    "build:typescript": "cd document-converter/typescript-server && npm run build",
+    "build:examples": "cd typescript-example/server && npm run build && cd ../client && npm run build",
+    "start:python-http": "cd document-converter/server && python document_converter.py",
+    "start:python-stdio": "cd document-converter/server && python stdio_server.py",
+    "start:typescript-http": "cd document-converter/typescript-server && npm start",
+    "start:typescript-stdio": "cd document-converter/typescript-server && npm run start:stdio",
+    "dev:python-http": "cd document-converter/server && python document_converter.py",
+    "dev:typescript-http": "cd document-converter/typescript-server && npm run dev",
+    "dev:typescript-stdio": "cd document-converter/typescript-server && npm run dev:stdio",
+    "docker:build": "docker-compose -f document-converter/docker-compose.yml build",
+    "docker:up": "docker-compose -f document-converter/docker-compose.yml up",
+    "docker:down": "docker-compose -f document-converter/docker-compose.yml down",
+    "test:python": "cd python-example && python -m pytest",
+    "test:typescript": "cd typescript-example && npm test",
+    "clean": "npm run clean:typescript && npm run clean:examples",
+    "clean:typescript": "cd document-converter/typescript-server && npm run clean",
+    "clean:examples": "cd typescript-example/server && npm run clean && cd ../client && npm run clean"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "streamable-http",
+    "sse",
+    "stdio",
+    "document-conversion",
+    "server",
+    "transport"
+  ],
+  "author": "MCP Streamable HTTP Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/mcp-streamable-http.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.8"
+  },
+  "workspaces": [
+    "document-converter/typescript-server",
+    "typescript-example/server",
+    "typescript-example/client"
+  ]
+}
